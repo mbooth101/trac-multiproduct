@@ -1,0 +1,102 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+  <xi:include href="admin.html" />
+  <head>
+    <title>$label_plural</title>
+  </head>
+
+  <body>
+    <h2>Manage $label_plural</h2>
+
+    <py:choose test="view">
+      <form py:when="'detail'" class="mod" id="modprodcomponent" method="post" action="">
+        <fieldset>
+          <legend>Modify $label_singular:</legend>
+          <div class="field">
+            <label>Product:<br /><input type="text" name="parent" value="$field.parent" disabled="disabled" /></label>
+          </div>
+          <div class="field">
+            <label>Name:<br /><input type="text" name="name" value="$field.name"/></label>
+          </div>
+          <div class="field">
+            <fieldset class="iefix">
+              <label for="description">
+                Description (you may use <a tabindex="42" href="${href.wiki('WikiFormatting')}">WikiFormatting</a> here):
+              </label>
+              <p>
+                <textarea id="description" name="description" class="wikitext" rows="6" cols="60">
+$field.description</textarea>
+              </p>
+            </fieldset>
+          </div>
+          <div class="buttons">
+            <input type="submit" name="cancel" value="Cancel" />
+            <input type="submit" name="save" value="Save" />
+          </div>
+        </fieldset>
+      </form>
+
+      <py:otherwise>
+        <form class="addnew" id="addprodcomponent" method="post" action="">
+          <fieldset>
+            <legend>Add $label_singular:</legend>
+            <input type="hidden" name="parent" value="$parent" />
+            <div class="field">
+              <label>Name:<br /><input type="text" name="name" /></label>
+            </div>
+            <div class="buttons">
+              <input type="submit" name="add" value="Add"/>
+            </div>
+          </fieldset>
+        </form>
+
+        <py:choose>
+          <form py:when="productcomponents" id="productcomponent_table" method="post" action="">
+            Product:
+            <select id="parent" name="parent" onchange="this.form.submit()">
+              <option py:for="product in products" selected="${parent == product.name or None}">$product.name</option>
+            </select>
+            <table class="listing" id="productcomponentlist">
+              <thead>
+                <tr><th class="sel">&nbsp;</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr py:for="item in productcomponents">
+                  <td class="sel"><input type="checkbox" name="sel" value="$item.name" /></td>
+                  <td class="name">
+                    <a href="${panel_href(parent + '/' + item.name)}">$item.name</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="buttons">
+              <input type="submit" name="remove" value="Remove selected items" />
+            </div>
+            <p class="help">
+              You can remove all items from this list to completely hide this
+              field from the user interface.
+            </p>
+          </form>
+
+          <form py:otherwise="" id="productcomponent_table" method="post" action="">
+            Product:
+            <select id="parent" name="parent" onchange="this.form.submit()">
+              <option py:for="product in products" selected="${parent == product.name or None}">$product.name</option>
+            </select>
+            <p class="help">
+              As long as you don't add any items to the list, this field
+              will remain completely hidden from the user interface.
+            </p>
+          </form>
+        </py:choose>
+      </py:otherwise>
+    </py:choose>
+  </body>
+
+</html>
