@@ -11,6 +11,8 @@ from trac.web.chrome import ITemplateProvider
 
 from multiproduct.model import schema, schema_ver
 
+__all__ = ['MultiProductPlugin']
+
 
 class MultiProductPlugin(Component):
     """Main plugin component."""

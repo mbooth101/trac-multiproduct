@@ -6,46 +6,15 @@
 
 from datetime import datetime
 
-from trac.config import Option
 from trac.core import *
 from trac.db import Table, Column
 from trac.resource import ResourceNotFound
-from trac.ticket.api import TicketSystem, ITicketManipulator
+from trac.ticket.api import TicketSystem
 from trac.ticket.model import simplify_whitespace
 from trac.util import embedded_numbers, sorted
 from trac.util.datefmt import utc, utcmax, to_timestamp
 from trac.util.translation import _
 
-
-class TicketExtensions(Component):
-    """Provides some extensions to the ticket model behaviour,
-    including extra validation."""
-
-    implements(ITicketManipulator)
-
-    # Config options
-
-    default_product = Option('ticket', 'default_product', '',
-        """Default product for newly created tickets.""")
-
-    # ITicketManipulator methods
-
-    def prepare_ticket(self, req, ticket, fields, actions):
-        return None
-
-    def validate_ticket(self, req, ticket):
-        db = self.env.get_db_cnx()
-
-        # Default the owner field to the product owner, if left blank
-        if ticket.values.get('product') and not ticket.values.get('owner'):
-            try:
-                product = Product(self.env, ticket['product'], db=db)
-                if product.owner:
-                    ticket['owner'] = product.owner
-            except ResourceNotFound, e:
-                # No such product exists
-                pass
-        return []
 
 class Product(object):
 

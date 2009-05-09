@@ -12,7 +12,7 @@ setup(
     version='0.0.1',
     author='Mat Booth',
     author_email='mat@matbooth.co.uk',
-    url='TODO',
+    url='http://www.matbooth.co.uk/trac/wiki/MultiProductStart',
     license='BSD',
     description='Multiple product support for Trac',
     long_description='TODO',
@@ -28,7 +28,7 @@ setup(
         'trac.plugins': [
            'multiproduct.admin = multiproduct.admin',
            'multiproduct.main = multiproduct.main',
-           'multiproduct.model = multiproduct.model',
+           'multiproduct.ticket = multiproduct.ticket',
            ]
         },
     install_requires = [])
