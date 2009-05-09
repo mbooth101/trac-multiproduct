@@ -15,7 +15,7 @@ setup(
     url='http://www.matbooth.co.uk/trac/wiki/MultiProductStart',
     license='BSD',
     description='Multiple product support for Trac',
-    long_description='TODO',
+    long_description='Adds multiple product support to the Trac issue tracking system.',
     packages=['multiproduct'],
     package_data={
         'multiproduct' : [
