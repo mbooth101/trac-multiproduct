@@ -123,10 +123,10 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/ticket.html
                      <textarea py:when="'textarea'" id="field-${field.name}" name="field_${field.name}"
                                cols="${field.width}" rows="${field.height}"
                                class="${field.format == 'wiki' and 'wikitext' or None}"
-Index: trac/ticket/templates/query.html
+Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
 ===================================================================
---- trac/ticket/templates/query.html	(revision 8103)
-+++ trac/ticket/templates/query.html	(working copy)
+--- /home/mbooth/workspace/trac/trac/ticket/templates/query.html	(revision 8103)
++++ /home/mbooth/workspace/trac/trac/ticket/templates/query.html	(working copy)
 @@ -47,7 +47,7 @@
              <py:for each="field_name in field_names" py:with="field = fields[field_name]">
                <py:for each="constraint_name, constraint in constraints.items()">
