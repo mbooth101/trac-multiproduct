@@ -143,7 +143,7 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
 +                        <py:when test="field.type == 'depselect'">
 +                          <select name="${constraint_name}">
 +                            <option></option>
-+                            <option py:for="option, parent in field.options"
++                            <option py:for="option, parent in field.options" value="$option"
 +                              selected="${option == constraint_value and 'selected' or None}">$parent / $option
 +                            </option>
 +                          </select>
