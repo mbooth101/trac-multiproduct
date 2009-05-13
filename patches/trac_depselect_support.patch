@@ -169,7 +169,7 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
 -            </py:for>]
 +            <py:choose test="field.type">
 +              <py:when test="'depselect'">
-+                <py:for each="option, sep in separated([o] for o, p in field.options)">"$option"$sep
++                <py:for each="(option, parent), sep in separated(field.options)">{text: "$parent / $option", value: "$option"}$sep
 +                </py:for>]
 +              </py:when>
 +              <py:otherwise>
