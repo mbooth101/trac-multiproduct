@@ -123,11 +123,20 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/ticket.html
                      <textarea py:when="'textarea'" id="field-${field.name}" name="field_${field.name}"
                                cols="${field.width}" rows="${field.height}"
                                class="${field.format == 'wiki' and 'wikitext' or None}"
-Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
+Index: trac/ticket/templates/query.html
 ===================================================================
---- /home/mbooth/workspace/trac/trac/ticket/templates/query.html	(revision 8103)
-+++ /home/mbooth/workspace/trac/trac/ticket/templates/query.html	(working copy)
-@@ -78,6 +78,16 @@
+--- trac/ticket/templates/query.html	(revision 8103)
++++ trac/ticket/templates/query.html	(working copy)
+@@ -47,7 +47,7 @@
+             <py:for each="field_name in field_names" py:with="field = fields[field_name]">
+               <py:for each="constraint_name, constraint in constraints.items()">
+                 <tbody py:if="field_name == constraint_name"
+-                  py:with="multiline = field.type in ('select', 'text', 'textarea')">
++                  py:with="multiline = field.type in ('select', 'depselect', 'text', 'textarea')">
+                   <py:for each="constraint_idx, constraint_value in enumerate(constraint['values'])">
+                     <tr class="${field_name}" py:if="multiline or constraint_idx == 0">
+                       <py:choose test="constraint_idx">
+@@ -78,6 +78,15 @@
                            </select>
                          </py:when>
  
@@ -135,8 +144,7 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
 +                          <select name="${constraint_name}">
 +                            <option></option>
 +                            <option py:for="option, parent in field.options"
-+                              class="sub_$parent"
-+                              selected="${option == constraint_value and 'selected' or None}">$option
++                              selected="${option == constraint_value and 'selected' or None}">$parent / $option
 +                            </option>
 +                          </select>
 +                        </py:when>
@@ -144,7 +152,7 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
                          <py:when test="field.type == 'radio'">
                            <py:for each="option in field.options">
                              <input type="checkbox" id="${field_name}_$option" name="${field_name}"
-@@ -153,7 +163,7 @@
+@@ -153,7 +162,7 @@
            <select name="group" id="group">
              <option></option>
              <py:for each="field_name in field_names" py:with="field = fields[field_name]">
@@ -153,7 +161,7 @@ Index: /home/mbooth/workspace/trac/trac/ticket/templates/query.html
                        selected="${field_name == query.group or None}"
                        value="${field_name}">${field.label}</option>
              </py:for>
-@@ -192,8 +202,16 @@
+@@ -192,8 +201,16 @@
          <py:for each="(field_name, field), sep in separated(fields.iteritems())">
            $field_name: { type: "${javascript_quote(field.type)}", label: "${javascript_quote(field.label)}"
            <py:if test="'options' in field">, options: [
