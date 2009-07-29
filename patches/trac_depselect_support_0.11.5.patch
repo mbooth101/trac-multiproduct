@@ -1,6 +1,6 @@
 Index: trac/ticket/api.py
 ===================================================================
---- trac/ticket/api.py	(revision 8103)
+--- trac/ticket/api.py	(revision 8398)
 +++ trac/ticket/api.py	(working copy)
 @@ -214,6 +214,7 @@
  
@@ -42,7 +42,7 @@ Index: trac/ticket/api.py
              field = {'name': name, 'type': 'text', 'label': name.title()}
 Index: trac/ticket/web_ui.py
 ===================================================================
---- trac/ticket/web_ui.py	(revision 8103)
+--- trac/ticket/web_ui.py	(revision 8398)
 +++ trac/ticket/web_ui.py	(working copy)
 @@ -931,10 +931,16 @@
              if name in ticket.values and name in ticket._old:
@@ -67,9 +67,9 @@ Index: trac/ticket/web_ui.py
                      valid = False
 Index: trac/ticket/roadmap.py
 ===================================================================
---- trac/ticket/roadmap.py	(revision 8103)
+--- trac/ticket/roadmap.py	(revision 8398)
 +++ trac/ticket/roadmap.py	(working copy)
-@@ -698,7 +698,7 @@
+@@ -709,7 +709,7 @@
  
          # collect fields that can be used for grouping
          for field in ticket_fields:
@@ -78,7 +78,7 @@ Index: trac/ticket/roadmap.py
                      or field['name'] in ('owner', 'reporter'):
                  available_groups.append({'name': field['name'],
                                           'label': field['label']})
-@@ -733,7 +733,10 @@
+@@ -744,7 +744,10 @@
              for field in ticket_fields:
                  if field['name'] == by:
                      if field.has_key('options'):
@@ -92,9 +92,9 @@ Index: trac/ticket/roadmap.py
                          cursor.execute("SELECT DISTINCT %s FROM ticket "
 Index: trac/ticket/query.py
 ===================================================================
---- trac/ticket/query.py	(revision 8103)
+--- trac/ticket/query.py	(revision 8398)
 +++ trac/ticket/query.py	(working copy)
-@@ -615,6 +615,10 @@
+@@ -620,6 +620,10 @@
              {'name': _("is"), 'value': ""},
              {'name': _("is not"), 'value': "!"}
          ]
@@ -107,9 +107,9 @@ Index: trac/ticket/query.py
          groupsequence = []
 Index: trac/ticket/templates/ticket.html
 ===================================================================
---- trac/ticket/templates/ticket.html	(revision 8103)
+--- trac/ticket/templates/ticket.html	(revision 8398)
 +++ trac/ticket/templates/ticket.html	(working copy)
-@@ -326,6 +326,13 @@
+@@ -329,6 +329,13 @@
                                  py:content="option"></option>
                        </optgroup>
                      </select>
@@ -125,7 +125,7 @@ Index: trac/ticket/templates/ticket.html
                                class="${field.format == 'wiki' and 'wikitext' or None}"
 Index: trac/ticket/templates/query.html
 ===================================================================
---- trac/ticket/templates/query.html	(revision 8103)
+--- trac/ticket/templates/query.html	(revision 8398)
 +++ trac/ticket/templates/query.html	(working copy)
 @@ -47,7 +47,7 @@
              <py:for each="field_name in field_names" py:with="field = fields[field_name]">
@@ -182,7 +182,7 @@ Index: trac/ticket/templates/query.html
          };
 Index: trac/htdocs/js/query.js
 ===================================================================
---- trac/htdocs/js/query.js	(revision 8103)
+--- trac/htdocs/js/query.js	(revision 8398)
 +++ trac/htdocs/js/query.js	(working copy)
 @@ -223,7 +223,7 @@
          // Add the selector or text input for the actual filter value
@@ -195,7 +195,7 @@ Index: trac/htdocs/js/query.js
            var element = document.createElement("input");
 Index: setup.cfg
 ===================================================================
---- setup.cfg	(revision 8103)
+--- setup.cfg	(revision 8398)
 +++ setup.cfg	(working copy)
 @@ -1,5 +1,5 @@
  [egg_info]
