@@ -12,7 +12,7 @@ setup(
     version='0.0.1',
     author='Mat Booth',
     author_email='mat@matbooth.co.uk',
-    url='http://www.matbooth.co.uk/trac/wiki/MultiProductStart',
+    url='https://github.com/mbooth101/trac-multiproduct',
     license='BSD',
     description='Multiple product support for Trac',
     long_description='Adds multiple product support to the Trac issue tracking system.',
